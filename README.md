@@ -43,7 +43,7 @@ Extends [alexsteinerde/graphql-kit](https://github.com/alexsteinerde/graphql-kit
 Depends on:
 - `develop` branch of [capturecontext/swift-prelude](https://github.com/capturecontext/swift-prelude).
 
-- [GraphitiExtensions](#GraphitiExtensions)
+- [GraphitiExtensions](#graphitiextensions)
 
 Features:
 
