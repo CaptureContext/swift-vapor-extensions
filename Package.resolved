@@ -1,13 +1,13 @@
 {
-  "originHash" : "83964dd49ff38fb3f8f609a8e0a635de455c08a4097e4714597464480c6f066e",
+  "originHash" : "655dc29a43438a7da98eb757870341ab18c55b794530c3c2e2721fab2bfb4c7c",
   "pins" : [
     {
       "identity" : "async-http-client",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-server/async-http-client.git",
       "state" : {
-        "revision" : "c5784ca81535cc6a92d900f84abd070dfb0e9392",
-        "version" : "1.32.1"
+        "revision" : "3b57e00556515b126ad74455de1e6fa456856391",
+        "version" : "1.33.0"
       }
     },
     {
@@ -29,15 +29,6 @@
       }
     },
     {
-      "identity" : "fluent",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/fluent.git",
-      "state" : {
-        "revision" : "2fe9e36daf4bdb5edcf193e0d0806ba2074d2864",
-        "version" : "4.13.0"
-      }
-    },
-    {
       "identity" : "fluent-kit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/fluent-kit.git",
@@ -51,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/GraphQLSwift/Graphiti.git",
       "state" : {
-        "revision" : "af903a243862c6427935677b91f67df0c21f2a71",
-        "version" : "0.26.0"
+        "revision" : "3ec7bf90d9884324852af9d96d2ce5aa60e02cde",
+        "version" : "3.1.0"
       }
     },
     {
@@ -60,17 +51,35 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/GraphQLSwift/GraphQL.git",
       "state" : {
-        "revision" : "ec809df8cce95d6aea820f70f04067abc08080f2",
-        "version" : "2.10.3"
+        "revision" : "397c0f43a1eb6a401858f896263288375efcf0bd",
+        "version" : "4.1.0"
       }
     },
     {
-      "identity" : "graphql-kit",
+      "identity" : "graphql-vapor",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/alexsteinerde/graphql-kit.git",
+      "location" : "https://github.com/graphqlswift/graphql-vapor.git",
       "state" : {
-        "revision" : "73485f3ae2d200431ad6cd48e998eabc66214b64",
-        "version" : "2.4.0"
+        "revision" : "b2e24e777e481713755bb3b185e0e79aa7c2ae97",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "graphqltransportws",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GraphQLSwift/GraphQLTransportWS.git",
+      "state" : {
+        "revision" : "6d62d9f980346f0644a5f4dc1593f2b0f1d07b44",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "graphqlws",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GraphQLSwift/GraphQLWS.git",
+      "state" : {
+        "revision" : "5a3b62e478668199d22f52df7cc7d44b51394cb4",
+        "version" : "1.0.0"
       }
     },
     {
@@ -200,12 +209,39 @@
       }
     },
     {
+      "identity" : "swift-keypath-mapping",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/capturecontext/swift-keypath-mapping.git",
+      "state" : {
+        "revision" : "e30d8e31f7ae1e39349e697bccabca3b473572ee",
+        "version" : "0.0.2"
+      }
+    },
+    {
+      "identity" : "swift-keypaths-extensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/capturecontext/swift-keypaths-extensions.git",
+      "state" : {
+        "revision" : "b0f02a0057b5274521142ad4cc28dc9cf7464943",
+        "version" : "0.2.0"
+      }
+    },
+    {
       "identity" : "swift-log",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log.git",
       "state" : {
         "revision" : "bbd81b6725ae874c69e9b8c8804d462356b55523",
         "version" : "1.10.1"
+      }
+    },
+    {
+      "identity" : "swift-marker-protocols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/capturecontext/swift-marker-protocols.git",
+      "state" : {
+        "revision" : "22ad220854d3d001a80a0ef0e01f23598301db8c",
+        "version" : "1.5.2"
       }
     },
     {
@@ -240,8 +276,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio-http2.git",
       "state" : {
-        "revision" : "9019b76fa858564a27e0aab13c01987d6e2869fa",
-        "version" : "1.41.0"
+        "revision" : "6d8d596f0a9bfebb925733003731fe2d749b7e02",
+        "version" : "1.42.0"
       }
     },
     {
@@ -269,15 +305,6 @@
       "state" : {
         "revision" : "0c0290ff6b24942dadb83a929ffaaa1481df04a2",
         "version" : "1.1.1"
-      }
-    },
-    {
-      "identity" : "swift-prelude",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/capturecontext/swift-prelude.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "19edbd1371df386aca00cd5f717f554c49e4c3b9"
       }
     },
     {
