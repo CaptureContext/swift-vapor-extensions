@@ -1,4 +1,5 @@
 import FluentKit
+import ArrayBuilder
 
 extension Migrations {
 	@inlinable
@@ -41,7 +42,14 @@ extension MigrationGroup {
 	) -> MigrationGroup {
 		return .group(groups.flatMap(\.migrations))
 	}
-	
+
+	@inlinable
+	public static func group(
+		@ArrayBuilder<MigrationGroup> _ groups: () -> [MigrationGroup]
+	) -> MigrationGroup {
+		return .group(groups())
+	}
+
 	@inlinable
 	public static func group(
 		_ migrations: Migration...
@@ -54,6 +62,13 @@ extension MigrationGroup {
 		_ migrations: [Migration]
 	) -> MigrationGroup {
 		return MigrationGroup(migrations)
+	}
+
+	@inlinable
+	public static func group(
+		@ArrayBuilder<Migration> _ migrations: () -> [Migration]
+	) -> MigrationGroup {
+		return .group(migrations())
 	}
 }
 

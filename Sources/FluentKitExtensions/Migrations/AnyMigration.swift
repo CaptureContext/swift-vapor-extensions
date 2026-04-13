@@ -1,22 +1,30 @@
-import FluentKit
+@preconcurrency import FluentKit
 
-public struct AnyMigration: Migration {
+public struct AnyMigration: AsyncMigration {
 	public var name: String
-	private var prepare: @Sendable (Database) -> EventLoopFuture<Void>
-	private var revert: @Sendable (Database) -> EventLoopFuture<Void>
+	private var prepare: @Sendable (Database) async throws -> Void
+	private var revert: @Sendable (Database) async throws -> Void
 
 	public init(
 		name: String,
-		prepare: @escaping @Sendable (Database & Sendable) -> EventLoopFuture<Void>,
-		revert: @escaping @Sendable (Database & Sendable) -> EventLoopFuture<Void>
+		prepare: @escaping @Sendable (Database) async throws -> Void,
+		revert: @escaping @Sendable (Database) async throws -> Void
 	) {
 		self.name = name
 		self.prepare = prepare
 		self.revert = revert
 	}
 	
-	public func prepare(on database: Database) -> EventLoopFuture<Void> { prepare(database) }
-	public func revert(on database: Database) -> EventLoopFuture<Void> { revert(database) }
+	public func prepare(
+		on database: Database
+	) async throws {
+		try await prepare(database)
+	}
+	public func revert(
+		on database: Database
+	) async throws {
+		try await revert(database)
+	}
 }
 
 // MARK: - Convenience
@@ -24,11 +32,19 @@ public struct AnyMigration: Migration {
 extension AnyMigration {
 	@inlinable
 	public init(_ migration: Migration) {
-		self.init(
-			name: migration.name,
-			prepare: migration.prepare,
-			revert: migration.revert
-		)
+		if let migration = migration as? AsyncMigration {
+			self.init(
+				name: migration.name,
+				prepare: migration.prepare,
+				revert: migration.revert
+			)
+		} else {
+			self.init(
+				name: migration.name,
+				prepare: migration.prepare,
+				revert: migration.revert
+			)
+		}
 	}
 	
 	@inlinable
@@ -52,20 +68,16 @@ extension AnyMigration {
 	@inlinable
 	public init(
 		name: String,
-		prepare: @escaping @Sendable (Database) async throws -> Void,
-		revert: @escaping @Sendable (Database) async throws -> Void
+		prepare: @escaping @Sendable (Database) -> EventLoopFuture<Void>,
+		revert: @escaping @Sendable (Database) -> EventLoopFuture<Void>
 	) {
 		self.init(
 			name: name,
 			prepare: { db in
-				db.eventLoop.makeFutureWithTask {
-					try await prepare(db)
-				}
+				try await prepare(db).get()
 			},
 			revert: { db in
-				db.eventLoop.makeFutureWithTask {
-					try await revert(db)
-				}
+				try await revert(db).get()
 			}
 		)
 	}
