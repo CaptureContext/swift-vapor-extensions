@@ -15,7 +15,7 @@ extension Migration where Self == AnyMigration {
 	}
 	
 	@inlinable
-	public static func migration<T: Model>(
+	public static func migration<T: Model & Sendable>(
 		_ name: String,
 		for modelType: T.Type,
 		prepare: @escaping @Sendable (SchemaBuilder) -> EventLoopFuture<Void>,
@@ -47,7 +47,7 @@ extension Migration where Self == AnyMigration {
 	}
 	
 	@inlinable
-	public static func migration<T: Model>(
+	public static func migration<T: Model & Sendable>(
 		_ name: String,
 		for modelType: T.Type,
 		prepare: @escaping @Sendable (SchemaBuilder) async throws -> Void,

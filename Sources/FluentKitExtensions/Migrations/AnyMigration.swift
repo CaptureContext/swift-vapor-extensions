@@ -48,7 +48,7 @@ extension AnyMigration {
 	}
 	
 	@inlinable
-	public init<T: Model>(
+	public init<T: Model & Sendable>(
 		_ name: String,
 		for modelType: T.Type,
 		prepare: @escaping @Sendable (SchemaBuilder) -> EventLoopFuture<Void>,
@@ -83,7 +83,7 @@ extension AnyMigration {
 	}
 	
 	@inlinable
-	public init<T: Model>(
+	public init<T: Model & Sendable>(
 		_ name: String,
 		for modelType: T.Type,
 		prepare: @escaping @Sendable (SchemaBuilder) async throws -> Void,
@@ -92,14 +92,10 @@ extension AnyMigration {
 		self.init(
 			name: name,
 			prepare: { db in
-				db.eventLoop.makeFutureWithTask {
-					try await prepare(db.schema(modelType.schema))
-				}
+				try await prepare(db.schema(modelType.schema))
 			},
 			revert: { db in
-				db.eventLoop.makeFutureWithTask {
-					try await revert(db.schema(modelType.schema))
-				}
+				try await revert(db.schema(modelType.schema))
 			}
 		)
 	}
