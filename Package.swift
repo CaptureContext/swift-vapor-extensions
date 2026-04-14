@@ -23,7 +23,7 @@ let package = Package(
 	dependencies: [
 		.package(
 			url: "https://github.com/vapor/fluent-kit.git",
-			.upToNextMajor(from: "1.44.0")
+			.upToNextMajor(from: "1.53.0")
 		),
 		.package(
 			url: "https://github.com/graphqlswift/graphiti.git",

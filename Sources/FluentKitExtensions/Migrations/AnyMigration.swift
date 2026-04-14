@@ -35,14 +35,14 @@ extension AnyMigration {
 		if let migration = migration as? AsyncMigration {
 			self.init(
 				name: migration.name,
-				prepare: migration.prepare,
-				revert: migration.revert
+				prepare: { db in try await migration.prepare(on: db) },
+				revert: { db in try await migration.revert(on: db) }
 			)
 		} else {
 			self.init(
 				name: migration.name,
-				prepare: migration.prepare,
-				revert: migration.revert
+				prepare: { db in try await migration.prepare(on: db).get() },
+				revert: { db in try await migration.revert(on: db).get() }
 			)
 		}
 	}
@@ -56,8 +56,8 @@ extension AnyMigration {
 	) {
 		self.init(
 			name: name,
-			prepare: { db in prepare(db.schema(modelType.schema)) },
-			revert: { db in revert(db.schema(modelType.schema)) }
+			prepare: { db in try await prepare(db.schema(modelType.schema)).get() },
+			revert: { db in try await revert(db.schema(modelType.schema)).get() }
 		)
 	}
 }
@@ -73,12 +73,8 @@ extension AnyMigration {
 	) {
 		self.init(
 			name: name,
-			prepare: { db in
-				try await prepare(db).get()
-			},
-			revert: { db in
-				try await revert(db).get()
-			}
+			prepare: { db in try await prepare(db).get() },
+			revert: { db in try await revert(db).get() }
 		)
 	}
 	
