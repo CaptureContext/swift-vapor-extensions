@@ -31,7 +31,7 @@ let package = Package(
 		),
 		.package(
 			url: "https://github.com/graphqlswift/graphql-vapor.git",
-			.upToNextMajor(from: "1.0.0")
+			.upToNextMajor(from: "1.1.1")
 		),
 		.package(
 			url: "https://github.com/capturecontext/swift-keypaths-extensions.git",
