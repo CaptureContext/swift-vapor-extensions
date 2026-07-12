@@ -53,7 +53,11 @@ let package = Package(
 				.product(
 					name: "FluentKit",
 					package: "fluent-kit"
-				)
+				),
+				.product(
+					name: "ArrayBuilder",
+					package: "swift-result-builders"
+				),
 			]
 		),
 		.target(
