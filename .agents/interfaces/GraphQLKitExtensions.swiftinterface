@@ -1,0 +1,35 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4 (swiftlang-6.4.0.25.4 clang-2100.3.25.1)
+// swift-module-flags: -target arm64-apple-macos12.0 -enable-objc-interop -language-mode 6 -O -enable-experimental-feature DebugDescriptionMacro -module-name GraphQLKitExtensions -package-name swift_vapor_extensions
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+import Fluent
+@_exported import GraphQLKit
+@_exported import GraphitiExtensions
+import Prelude
+import Swift
+import Vapor
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+extension Graphiti::Field where Context == Vapor::Request, Arguments == Graphiti::NoArguments {
+  convenience public init<Resolver>(_ name: Swift::String, for keyPath: @escaping (ObjectType) -> Resolver) where FieldType == Resolver.Response, Resolver : GraphQLKitExtensions::SimpleResolver, Resolver.Arguments == Graphiti::NoArguments
+}
+extension Graphiti::Field where Context == Vapor::Request, FieldType : Swift::Encodable {
+  convenience public init<Resolver>(_ name: Swift::String, for keyPath: @escaping (ObjectType) -> Resolver, @Graphiti::ArgumentComponentBuilder<Arguments> _ arguments: () -> [Graphiti::ArgumentComponent<Arguments>]) where FieldType == Resolver.Response, Arguments == Resolver.Arguments, Resolver : GraphQLKitExtensions::SimpleResolver
+}
+extension Graphiti::Field where Arguments == Graphiti::NoArguments {
+  convenience public init(_ name: Swift::String, getter: @escaping (ObjectType) -> FieldType)
+}
+extension GraphQL::GraphQLJSONEncoder : @retroactive Vapor::ContentEncoder, @unchecked Swift::Sendable {
+  public func encode<E>(_ encodable: E, to body: inout NIOCore::ByteBuffer, headers: inout NIOHTTP1::HTTPHeaders) throws where E : Swift::Encodable
+}
+public protocol SimpleResolver : Prelude::Function {
+  associatedtype Arguments : Swift::Decodable where Self.Input == (Vapor::Request, Self.Arguments)
+  associatedtype Response : Swift::Encodable where Self.Output == NIOCore::EventLoopFuture<Self.Response>
+}
+extension GraphQLKitExtensions::SimpleResolver {
+  public typealias CallSignature = ((Vapor::Request, Self.Arguments)) -> NIOCore::EventLoopFuture<Self.Response>
+}
+extension GraphQLKitExtensions::SimpleResolver {
+  public init(trowing call: @escaping ((Vapor::Request, Self.Arguments)) throws -> NIOCore::EventLoopFuture<Self.Response>)
+}
