@@ -23,7 +23,7 @@ let package = Package(
 	dependencies: [
 		.package(
 			url: "https://github.com/vapor/fluent-kit.git",
-			.upToNextMajor(from: "1.53.0")
+			.upToNextMajor(from: "1.57.0")
 		),
 		.package(
 			url: "https://github.com/graphqlswift/graphiti.git",
@@ -35,15 +35,15 @@ let package = Package(
 		),
 		.package(
 			url: "https://github.com/capturecontext/swift-keypaths-extensions.git",
-			.upToNextMajor(from: "0.2.0")
+			.upToNextMinor(from: "0.2.2")
 		),
 		.package(
 			url: "https://github.com/capturecontext/swift-result-builders.git",
-			.upToNextMajor(from: "0.0.2")
+			.upToNextMinor(from: "0.0.3")
 		),
 		.package(
 			url: "https://github.com/capturecontext/swift-function-composition.git",
-			branch: "tuples"
+			.upToNextMinor(from: "0.1.0")
 		),
 	],
 	targets: [
@@ -63,6 +63,10 @@ let package = Package(
 		.target(
 			name: "GraphQLExtensions",
 			dependencies: [
+				.product(
+					name: "FunctionComposition",
+					package: "swift-function-composition"
+				),
 				.product(
 					name: "KeyPathsExtensions",
 					package: "swift-keypaths-extensions"
